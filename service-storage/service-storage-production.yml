@@ -1,0 +1,47 @@
+#
+# production configuration
+#
+spring:
+   servlet:
+      multipart:
+         enabled: true
+         max-file-size: 20MB
+         max-request-size: 100MB
+server:
+   port: 0
+   servlet:
+      context-path: /
+      encoding:
+         charset: UTF-8
+         enabled: true
+eureka:
+   instance:
+      preferIpAddress: true
+   client:
+      fetchRegistry: true
+      registerWithEureka: true
+      serviceUrl:
+         defaultZone: http://192.168.0.51:8761/eureka
+storage:
+   location: /service-storage/assets
+   httpd:
+      host: 192.168.0.51
+      port: 9999
+logging:
+   pattern:
+      file: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n"
+   logback:
+      rollingpolicy:
+         file-name-pattern: "logs/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.zip"
+         max-file-size: 10MB
+         max-history: 10
+   file:
+      name: logs/${spring.application.name}.log
+   level:
+      root: WARN
+      me:
+         kickscar:
+            msa:
+               service:
+                  storage:
+                     exception: ERROR
